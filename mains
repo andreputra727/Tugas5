@@ -1,0 +1,110 @@
+package praktic.geometry.mains; // Package utama tempat class main berada
+
+/*
+
+  .d8b.  d8b   db d8888b. d8888b. d88888b 
+d8' `8b 888o  88 88  `8D 88  `8D 88'     
+88ooo88 88V8o 88 88   88 88oobY' 88ooooo 
+88~~~88 88 V8o88 88   88 88`8b   88~~~~~ 
+88   88 88  V888 88  .8D 88 `88. 88.     
+YP   YP VP   V8P Y8888D' 88   YD Y88888P
+
+Andre Syaputra Siregar - 245150707111045
+*/
+
+import java.util.Scanner; // Import Scanner untuk input dari pengguna
+import praktic.geometry.bases.CircularShape; // Import class CircularShape
+import praktic.geometry.bases.Shape; // Import class Shape
+import praktic.geometry.interfaces.Weightable; // Import interface Weightable
+import praktic.geometry.shapes.Circle; // Import class Circle
+import praktic.geometry.shapes.Cube; // Import class Cube
+import praktic.geometry.shapes.Sphere; // Import class Sphere
+import praktic.geometry.shapes.Square; // Import class Square
+
+public class ShapeCalculator { // Class utama untuk menjalankan program
+    public static void main(String[] args) { // Method main sebagai titik masuk program
+        Scanner in = new Scanner(System.in); // Objek Scanner untuk menerima input pengguna
+
+        // Deklarasi warna ANSI untuk tampilan terminal
+        String reset = "\u001B[0m"; 
+        String hijau = "\u001B[32m";
+        String garis = hijau + "======================================" + reset;
+
+        // Header aplikasi
+        System.out.println(garis);
+        System.out.println("Shape Calculator");
+        System.out.print("Nama Lengkap : ");
+        String nama = in.nextLine(); // Input nama lengkap
+        System.out.print("NIM : ");
+        String nim = in.nextLine(); // Input NIM
+        System.out.println(garis);
+
+        // Section Lingkaran (2D Circle)
+        System.out.println("2D Circle");
+        System.out.println(garis);
+        System.out.print("Enter radius     : ");
+        double r1 = in.nextDouble(); // Input jari-jari lingkaran
+        System.out.println(garis);
+        Shape circle1 = new Circle(); // Objek Circle dengan konstruktor default
+        CircularShape circle2 = new Circle(r1); // Objek Circle dengan jari-jari input
+        circle2.printInfo(); // Tampilkan informasi lingkaran
+        System.out.println(garis);
+
+        // Section Persegi (2D Square)
+        System.out.println("2D Square");
+        System.out.println(garis);
+        System.out.print("Enter side       : ");
+        double s1 = in.nextDouble(); // Input panjang sisi persegi
+        System.out.println(garis);
+        Square square1 = new Square(); // Objek Square default
+        Square square2 = new Square(s1); // Objek Square dengan sisi input
+        square2.printInfo(); // Tampilkan informasi persegi
+        System.out.println(garis);
+
+        // Section Kubus (3D Weightable Cube)
+        System.out.println("3D Weightable Cube");
+        System.out.println(garis);
+        System.out.print("Enter edge       : ");
+        double e1 = in.nextDouble(); // Input panjang sisi kubus
+        System.out.print("Enter mass       : ");
+        double m1 = in.nextDouble(); // Input massa kubus
+        System.out.println(garis);
+        Cube cube1 = new Cube(); // Objek Cube default
+        Cube cube2 = new Cube(e1, m1); // Objek Cube dengan sisi dan massa
+        cube2.printInfo(); // Tampilkan informasi kubus
+        System.out.println(garis);
+
+        // Section Bola (3D Weightable Sphere)
+        System.out.println("3D Weightable Sphere");
+        System.out.println(garis);
+        System.out.print("Enter radius     : ");
+        double r2 = in.nextDouble(); // Input jari-jari bola
+        System.out.print("Enter mass       : ");
+        double m2 = in.nextDouble(); // Input massa bola
+        System.out.println(garis);
+        Sphere sphere = new Sphere(r2, m2); // Objek Sphere dengan radius dan massa
+        sphere.printInfo(); // Tampilkan informasi bola
+        System.out.println(garis);
+
+        // Section Polymorphism menggunakan Interface Weightable
+        System.out.println("Volume of Cube and Sphere");
+        System.out.println("POLYMORPHISM: INTERFACE");
+        System.out.println(garis);
+        System.out.print("Enter edge       : ");
+        double e2 = in.nextDouble(); // Input sisi kubus polymorph
+        System.out.print("Enter radius     : ");
+        double r3 = in.nextDouble(); // Input radius bola polymorph
+        System.out.print("Enter mass       : ");
+        double m3 = in.nextDouble(); // Input massa objek
+        System.out.println(garis);
+
+        Weightable cubeW = new Cube(e2, m3); // Objek Cube sebagai Weightable
+        Weightable sphereW = new Sphere(r3, m3); // Objek Sphere sebagai Weightable
+
+        // Tampilkan volume dan berat dengan polymorphism
+        System.out.printf("%-16s: %.2f%n", "Cube's volume", ((Cube) cubeW).getVolume());
+        System.out.printf("%-16s: %.2f%n", "Sphere's volume", ((Sphere) sphereW).getVolume());
+        System.out.printf("%-16s: %.2f%n", "Weight", sphereW.getWeight());
+        System.out.println(garis); // Penutup akhir program
+    }
+}
